@@ -1,52 +1,80 @@
-# TC1031.Proyecto
-# Calculadora de tiempo/costo de transito de productos ordenados en linea 
-Se basa en el calculo que se hace para la construccion aproximado de algun producto usando informacion como la fecha, la cantidad de unidades y el producto. Para dar una fecha y precio aproximado del producto 
+## TC1031.Integradora A
 
->Datos/ejemplo: 
+# Calculadora de precio en envios usando CP o coordenadas. 
+
+Se basa en el calculo de distancia usando coordenadas/CP del punto de envio a su destino (en esta version el punto de envio es fijo), este programa esta pensado para negocios que van a enviar algun producto a algun lugar de la ciudad. 
+
+>Ejemplo de Producto: 
 >
->Producto: Telefono (Tipo de articulo, en base a esto se genera el costo de envio)
+>ID = 1
 >
->Fecha: 19/01/21(Fecha desglozada)
+>Volumen: 950 cm^3
+>
+>Fecha: 19/01
 >     Día: 19
 >     Mes: Enero
->     Año: 2021
 >
->Unidades: 15 (Se le da un porcentaje de aplazamiento en base a la cantidad)
+>Ejemplo Ubicacion:
 >
->
+>CP: 52786
+>   latitud: 19.361111111111
+>   longitud: -99.350833333333
 
-Utilizando esta informacion sera dividadia en casos. 
-Si algun producto tiene un pedido menor a 30 unidades es una orden de prioridad baja, por lo tanto se le tiene que poner algo de demora para reservar las maquinas para pedidos mas importantes. Dando una demora aproximada del 50% más de lo que cuesta construir alguno de estos productos. 
+Utilizando esta informacion se hara el calculo. 
+Usando las coordenadas de una planta de distribucion como referencia con la formula que se presenta a continuacion
 
-    Tiempo (20 unidades) = TiempoEstandar * 0.5 + TiempoEstandar 
-    Este concepto se debe de aplicar a la fecha para tener un display correcto
+    R = radio de la Tierra
+    Δlat = lat2− lat1
+    Δlong = long2− long1
+    a = sin²(Δlat/2) + cos(lat1) · cos(lat2) · sin²(Δlong/2)
+    c = 2 · atan2(√a, √(1−a))
+    d = R · c
 
-Si el mismo producto tiene un pedido entre 30 y 100 unidades es de prioridad media y tiene un menor demora en el tiempo de produccion ya que es más conveniente a la fabrica sin embargo no es de la prioridad más alta ya que siguen sin ser demasiados para usar todos los equipos de la fabrica. 
-
-    Tiempo (50 unidades) = TiempoEstandar * 0.2 + TiempoEstandar 
-    Este concepto se debe de aplicar a la fecha para tener un display correcto
     
-En el caso de que el pedido sea mayor a 100 unidades y menor a 200 el producto tendra el menor tiempo posible el cual seria el tiempo estandar
-
-    Tiempo (150 unidades) = TiempoEstandar
-    
-El cuarto caso seria un cobro extra por ser un envio de emergencia, el cual a cambio de usar más herramienta para producir un lote pequeño se hace un cobro adicional.
-    Tiempo express (50 unidades) = Tiempo estandar - Tiempo estandar * 0.2
-    Tiempo express (150 unidades) = Tiempo estandar
 
 ## SICT0302B: Toma decisiones 
 
 ### Selecciona y usa una estructura lineal adecuada al problema
 
-(Llena texto)
+    Para darle una estructura lineal voy a hacer una lista ligada unilateral porque van a estar organizadas mediante la fecha, por lo tanto un recorrido de ambas direcciones no es necesario al acomodar los datos de mayor a menor. 
+
+    Analisis de complejidad (Lista ligada): Linear O(n) 
 
 
 ### Selecciona un algoritmo de ordenamiento adecuado al problema
-Ya que voy a utilizar las fechas como metodo de organizacion voy a usar por el momento el metodo de la burbuja debido a que es simple, al separar la informacion de la fecha y tener más filtros para hacer que una fecha sea intercambiada y tener organizada la informacion por la fecha. En cambio tengo pensado usar un mergesort 
+
+    Ya que voy a utilizar los volumenes como referencia de organizacion, la mejor forma de tener la informacion/reporte es de mayor a menor y para eso voy a utilziar un ordenamiento burbuja debio a la simplicidad y cantidad de los datos. En el caso de querer implementar algo con mayor volumen seria recomendable el merge sort por su comportamiento logaritmico sin embargo no es necesario en este caso.  
+
+    Analisis de complejidad (Buble sort): Cuadrada O(n^2)
+
 
 ### Usa un árbol adecuado para resolver un problema
 
-(Llena texto)
+    Aplicare un arbol BST para organizar los codigos postales que se tengan y se agreguen para reducir el recorrido que se tenga por cada uno de CP, ya que en ningun caso se repite un codigo postal. (De ser así se tiene la opcion de modificar las coordenadas de referencia)
+
+    Analisis de complejidad (Lista ligada): Linear O(n)
+
+## SICT0303B: Implementa acciones científicas
+
+### Implementa mecanismos para consultar información de las estructras correctos
+
+    Para organizar y consultar informacion se usaron distintas estructuras con la intencion de que se mostraran las competencias y fuera un programa eficiente. 
+    
+    En el caso de los productos te permite organizarlos mediante el volumen usando un merge sort en la lista ligada  que se genera usando las fechas, permitiendo que se tenga la informacion organizada en la opcion 6. 
+>       Merge sort (opcion 5) 
+>       Linked List (productos, opcion 6). 
+    
+    Por el otro lado para los codigos postales use un arbol binario para organizar la informacion de forma no lineal y usar una busqueda binaria y no tener que recorrer el arbol completo para encontrar un dato, la consulta de la informacion en el arbol se puede ver en el caso o opcion 2 con la busqueda del CP
+>       Binary tree (Ubicaciones/CP) 
+>       Binary Tree Search (opcion 2) 
+
+### Implementa mecanismos de lectura de archivos correctos
+    Se tienen dos archivos "csv" que permiten guardar y leer los codigos postales y coordenadas en un archivo y los productos con su ID, fecha y volumen. 
+
+    Las funciones de lectura se encuentran en organiza.h (linea x-x1)
+
+### Implementa mecanismos de escritura de archivos correctos
+    Al agregar cada uno de las opciones a su respectiva estructura como el arbol o lista se agrega de forma automatica a su respectivo csv para tener la lista más amplia posible 
 
 ## SICT0301B: Evalúa los componentes
 
@@ -56,28 +84,4 @@ Ya que voy a utilizar las fechas como metodo de organizacion voy a usar por el m
 
 ### Hace un análisis de complejidad correcto y completo para todo el programa y sus compenetes,
 
-#### lista de paquetes
 
-(Llena texto)
-
-#### ordenamiento de paquetes
-
-(Llena texto)
-
-#### uso de árbol
-
-(Llena texto)
-
-## SICT0303B: Implementa acciones científicas 
-
-### Implementa mecanismos para consultar información de las estructuras correctos y útiles dentro de un programa.
-
-(Llena texto)
-
-### Implementa mecanismos de lectura de archivos correctos y útiles dentro de un programa. Usar de manera
-
-(Llena texto)
-
-### Implementa mecanismos de escritura de archivos correctos y útiles dentro de un programa. Usar de manera
-
-(Llena texto)
