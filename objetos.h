@@ -25,11 +25,11 @@ class Producto {
     public:
         Producto(): ID("_"),vol("_"), dia("_"), mes ("_"){};
         Producto (string , string , string, string);
+        void setter(string , string , string , string);
         string getVol (){return vol;}
         string getID () {return ID;}
         string getDia (){return dia;}
         string getMes (){return mes;}
-        void setFecha (string , string);
         void setID (string i){ID = i;}
         string showP ();
 
@@ -44,9 +44,11 @@ Producto :: Producto (string id_, string dia_ , string mes_ , string vol_){
     mes = mes_;
 }
 
-void Producto :: setFecha (string d , string m){
-    dia = d;
-    mes = m;
+void Producto :: setter (string id_, string dia_ , string mes_ , string vol_ ){
+    vol = vol_;
+    ID = id_;
+    dia = dia_;
+    mes = mes_;
 }
 
 string Producto :: showP (){
@@ -55,7 +57,7 @@ string Producto :: showP (){
     aux << "ID: " << ID << endl;
     aux << "Dia: " << dia << endl;
     aux << "Mes: " << mes << endl;
-    aux << "Volument: " << vol << endl;
+    aux << "Volumen: " << vol << endl;
     aux << "______________________________" << endl;
     return aux.str();
 }
@@ -69,6 +71,7 @@ class Ubicacion {
     public:
         Ubicacion(): cp("_"),lat("_"), lon("_"){};
         Ubicacion (string , string , string);
+        void setter (string , string , string);
         string getCP (){return cp;}
         string getLat () {return lat;}
         string getLon () {return lon;}
@@ -78,6 +81,12 @@ class Ubicacion {
 };
 
 Ubicacion :: Ubicacion (string cp_ , string lat1 , string lon1){
+    cp = cp_;
+    lat = lat1;
+    lon = lon1;
+}
+
+void Ubicacion :: setter (string cp_ , string lat1 , string lon1){
     cp = cp_;
     lat = lat1;
     lon = lon1;
@@ -128,8 +137,8 @@ class Node {
         Node(Ubicacion, Node<Ubicacion>*, Node<Ubicacion>*);
         void add(Ubicacion);
         bool find(T);
-        void findCP(Node<T> *root,string val,std::stringstream &aux)const;
-        void findCPUbi(Node<T> *root,string val,std::stringstream &aux)const;
+        void findCP(Node<T> *root,int v,std::stringstream &aux)const;
+        void findCPUbi(Node<T> *root,string v,std::stringstream &aux)const;
 
         void modificarUbi();
 
@@ -178,14 +187,16 @@ bool Node <T> :: find (T v){
 
 
 template <class T>
-void Node <T> :: findCP (Node<T> *root,string v,std::stringstream &aux)const{
+void Node <T> :: findCP (Node<T> *root,int v,std::stringstream &aux)const{
         stringstream x;
         x << v;
         string s = x.str();
+        if(root == NULL){
+            aux << "CP inexistente \n";
+        }
         if (s == root->val.getCP()) {
             aux << root->val.mostrarDatos();
             return;
-
         } 
         if ((s <= root->val.getCP()) && (root->left != 0)) {
             findCP(root->left,v,aux);
@@ -256,7 +267,9 @@ void BST::add(Ubicacion v) {
 	}
 }
 
-string BST::BSTcp(string v) {
+string BST::BSTcp(string ves) {
+    int v;
+    v = stoi(ves);
     std::stringstream num;
     if (root != 0) {
 		if (!empty()) {
