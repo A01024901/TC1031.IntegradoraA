@@ -26,11 +26,11 @@ class Ordenamiento {
         Ordenamiento (){datos = {};}
         list<Producto>readLocal ();
         void addPro (Producto);
-        void addCP (Ubicacion);
+        string addCP (Ubicacion);
         void searchCP (string);
         void modCoor ();
         void showCPList ();
-        void showP_vol ();
+        string showP_vol ();
         void showP_list ();
 };
 
@@ -91,9 +91,11 @@ void Ordenamiento :: addPro (Producto new1){
         cout << new1.showP();}	
 }
 
-void Ordenamiento :: addCP (Ubicacion new1){
+string Ordenamiento :: addCP (Ubicacion new1){
+    std :: stringstream aux;
 	if (new1.getCP() == arbolCP.BSTcp(new1.getCP())){
-        cout << "El elemento ya existe" << endl;
+        aux << "El elemento ya existe" << endl;
+        return aux.str();
     }
     else {
         ofstream addUbi;
@@ -101,8 +103,8 @@ void Ordenamiento :: addCP (Ubicacion new1){
         addUbi<<new1.getCP()<<","<<new1.getLat()<<","<<new1.getLon()<< endl;
         addUbi.close();
         arbolCP.add(new1);
-        cout<<new1.mostrarDatos();
-
+        aux<<new1.mostrarDatos();
+        return aux.str();
     }
 }
 
@@ -130,10 +132,12 @@ void Ordenamiento :: showCPList (){
         cout << aux.mostrarDatos();
     }
 }
-/*
-void Ordenamiento :: showP_vol (){
+
+
+string Ordenamiento :: showP_vol(){
+    std :: stringstream aux;
     
-}*/
+}
 
 void Ordenamiento :: showP_list (){
     ifstream archivo1("Productos.csv");
