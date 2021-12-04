@@ -21,14 +21,15 @@ int main (){
         cout << "------------------------------------\n";
         cout << "1.- Agregar codigo postal \n2.- Buscar codigo postal " << endl;            
         cout << "3.- Modificar ubicacion \n4.- Mostrar todos los CP y coordenadas \n5.- Mostrar lista de productos enviados" << endl;
-        cout << "6.- Mostrar productos por volumen \n7.- Salir \nIntrodusca opcion: ";
+        cout << "6.- Mostrar productos por volumen \n7.- Agregar producto \n8.- Salir \nIntrodusca opcion: ";
 
         cin >> opc; 
 
         switch (opc){
-            case 1:
+            case 1: //Funciona 
+            {
                 cout << "<<<<<<<<<<<< Agrega CP >>>>>>>>>>>>" << endl;
-                cout << "Introduzca el codigo postal";
+                cout << "Introduzca el codigo postal: ";
                 cin >> cp1;
                 cout << "Introduzca la latitud: ";
                 cin >> lat1;
@@ -38,7 +39,8 @@ int main (){
                 tienda.addCP (ejemplo);
                 cout << "------------------------------------\n";
                 break;
-            case 2:
+            }
+            case 2: //Funciona 
                 cout << "<<<<<<<<<<<< Buscar CP >>>>>>>>>>>>" << endl;
                 cout << "Que codigo postal buscas: ";
                 cin >> cp1;
@@ -49,12 +51,12 @@ int main (){
                 cout << "<<<<<<<<<<<< Modificar coordenadas CP >>>>>>>>>>>>" << endl;
                 cout << "------------------------------------\n";
                 break;
-            case 4:
+            case 4: //Funciona
                 cout << "<<<<<<<<<<<< Mostrar todos los CP y coordenadas >>>>>>>>>>>>" << endl;
                 tienda.showCPList();
                 cout << "------------------------------------\n";
                 break;
-            case 5: 
+            case 5: //Funciona
                 cout << "<<<<<<<<<<<< Mostrar lista de productos >>>>>>>>>>>>" << endl;
                 tienda.showP_list();
                 cout << "------------------------------------\n";
@@ -63,7 +65,8 @@ int main (){
                 cout << "<<<<<<<<<<<< Mostrar  por volumen >>>>>>>>>>>>" << endl;
                 cout << "------------------------------------\n";
                 break;
-            case 7:
+            case 7: //Funciona
+            {
                 cout << "<<<<<<<<<<<< Agregar producto >>>>>>>>>>>>" << endl;
                 cout << "Introduzca el volumen: ";
                 cin >> vol;
@@ -73,11 +76,13 @@ int main (){
                 cin >> mes;
                 cout << "Introduzca la ID: ";
                 cin >> ID;
-                Producto ejemploP (ID, vol , dia , mes);
+                Producto ejemploP (ID , dia , mes , vol);
                 tienda.addPro(ejemploP);
                 cout << "------------------------------------\n";
                 break;
-            case 8:
+            }
+
+            case 8: //Funciona
                 cout << "<<<<<<<<<<<< Gracias por participar >>>>>>>>>>>>" << endl;
                 exit = 1;
                 cout << "------------------------------------\n";
