@@ -165,7 +165,7 @@ void Ordenamiento::swap(vector<Producto> &v, int i, int j) {
 
 void Ordenamiento::bubleVol(vector <Producto> &v){
     for(int i = 0; i<v.size(); i++){
-    for(int j = 1; j<v.size()-1; j++){
+    for(int j = 0; j<v.size()-1; j++){
       if (v[j].getVol()>v[j+1].getVol()){
         swap(v, j, j+1);
     }
