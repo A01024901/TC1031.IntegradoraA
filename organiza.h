@@ -30,8 +30,11 @@ class Ordenamiento {
         void searchCP (string);
         void modCoor ();
         void showCPList ();
-        string showP_vol ();
         void showP_list ();
+        void swap(vector<Producto> &v, int i, int j);
+        void bubleVol (vector <Producto> &v);
+        string showVol();
+
 };
 
 list<Producto> Ordenamiento :: readLocal(){
@@ -133,12 +136,6 @@ void Ordenamiento :: showCPList (){
     }
 }
 
-
-string Ordenamiento :: showP_vol(){
-    std :: stringstream aux;
-    
-}
-
 void Ordenamiento :: showP_list (){
     ifstream archivo1("Productos.csv");
     string linea1;
@@ -160,12 +157,32 @@ void Ordenamiento :: showP_list (){
     archivo1.close();
 }
 
+void Ordenamiento::swap(vector<Producto> &v, int i, int j) {
+    Producto aux = v[i];
+    v[i] = v[j];
+    v[j] = aux;
+}
 
-/*
-void Ordenamiento :: modCoor (){
+void Ordenamiento::bubleVol(vector <Producto> &v){
+    for(int i = 0; i<v.size(); i++){
+    for(int j = 1; j<v.size()-1; j++){
+      if (v[j].getVol()>v[j+1].getVol()){
+        swap(v, j, j+1);
+    }
+    }
+    }
+}
 
+string Ordenamiento :: showVol(){
+    std :: stringstream aux;
+
+    vector <Producto> vect(productos.begin() , productos.end());
+    bubleVol(vect);
+    for (int i = 0; i < vect.size(); i++){
+        aux << vect[i].showP ();
+    }
+    return aux.str();
 }
 
 
-*/
 #endif
