@@ -63,6 +63,7 @@ int main (){
                 break;
             case 6:
                 cout << "<<<<<<<<<<<< Mostrar  por volumen >>>>>>>>>>>>" << endl;
+                cout << tienda.showVol();
                 cout << "------------------------------------\n";
                 break;
             case 7: //Funciona
