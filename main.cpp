@@ -4,6 +4,19 @@
 
 //Edgar Alexander Carrizalez Lerín A01024901
 
+/*
+Selecciona un algoritmo de ordenamiento adecuado al problema = Buble Sort
+Selecciona y usa una estructura lineal adecuada al problema = Lista Ligada
+Usa un árbol adecuado para resolver un problema = Arbol binario 
+Usa grafos para hacer analisis de información 
+Usa un algoritmo de búsqueda en grafos adecuado para resolver un problema
+Usa un algoritmo de hashing adecauado para resolver un problema
+
+Implementa mecanismos para consultar información de las estructras correctos = Main. caso 3-5
+Implementa mecanismos de lectura de archivos correctos = metodos readlocal
+Implementa mecanismos de escritura de archivos correctos = metodos addCp y Addproducto
+*/
+
 using namespace std;
 
 int main (){
@@ -20,8 +33,8 @@ int main (){
         cout << "Bienvenido a envios Carrizalez \nLe presentamos un numero de funciones a las que puede acceder para cotizar su envio" << endl;
         cout << "------------------------------------\n";
         cout << "1.- Agregar codigo postal \n2.- Buscar codigo postal " << endl;            
-        cout << "3.- Modificar ubicacion \n4.- Mostrar todos los CP y coordenadas \n5.- Mostrar lista de productos enviados" << endl;
-        cout << "6.- Mostrar productos por volumen \n7.- Agregar producto \n8.- Salir \nIntrodusca opcion: ";
+        cout << "3.- Mostrar todos los CP y coordenadas  \n4.- Mostrar lista de productos enviados  \n5.- Mostrar productos por volumen " << endl;
+        cout << "6.- Agregar producto \n7.- Salir \nIntrodusca opcion: ";
 
         cin >> opc; 
 
@@ -48,26 +61,21 @@ int main (){
                 cout << "------------------------------------\n";
                 break;
             case 3:
-                cout << "<<<<<<<<<<<< Modificar coordenadas CP >>>>>>>>>>>>" << endl;
-                cout << "------------------------------------\n";
-                break;
-            case 4: //Funciona
                 cout << "<<<<<<<<<<<< Mostrar todos los CP y coordenadas >>>>>>>>>>>>" << endl;
                 tienda.showCPList();
                 cout << "------------------------------------\n";
                 break;
-            case 5: //Funciona
+            case 4: //Funciona
                 cout << "<<<<<<<<<<<< Mostrar lista de productos >>>>>>>>>>>>" << endl;
                 tienda.showP_list();
                 cout << "------------------------------------\n";
                 break;
-            case 6:
+            case 5: //Funciona
                 cout << "<<<<<<<<<<<< Mostrar  por volumen >>>>>>>>>>>>" << endl;
                 cout << tienda.showVol();
                 cout << "------------------------------------\n";
                 break;
-            case 7: //Funciona
-            {
+            case 6:{
                 cout << "<<<<<<<<<<<< Agregar producto >>>>>>>>>>>>" << endl;
                 cout << "Introduzca el volumen: ";
                 cin >> vol;
@@ -80,10 +88,8 @@ int main (){
                 Producto ejemploP (ID , dia , mes , vol);
                 tienda.addPro(ejemploP);
                 cout << "------------------------------------\n";
-                break;
-            }
-
-            case 8: //Funciona
+                break;}
+            case 7: //Funciona
                 cout << "<<<<<<<<<<<< Gracias por participar >>>>>>>>>>>>" << endl;
                 exit = 1;
                 cout << "------------------------------------\n";
