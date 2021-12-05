@@ -206,38 +206,6 @@ void Node <T> :: findCP (Node<T> *root,int v,std::stringstream &aux)const{
         }
 }
 
-template <class T>
-void Node <T> :: findCPUbi (Node<T> *root,string v,std::stringstream &aux)const{
-        if (v == root->val.getCP()) {
-            root->val.mostrarDatos() ;	
-        } 
-        if ((v <= root->val.getCP()) && (root->left != 0)) {
-            findCP(root->left,v,aux);
-        } 
-        if ((v > root->val.getCP()) && (root->right != 0)) {
-            findCP(root->right,v,aux);
-        }
-}
-
-template <class T>
-void Node <T> :: modificarUbi (){
-    string cp1;
-    cout << "Introduce el CP a modificar: ";
-    cin >> cp1;
-    if (cp1 == val.getCP()) {
-		val.setCor();
-	} 
-    else if (cp1 < val.getCP()) {
-		left->find(val);
-	} 
-    else if (cp1 > val.getCP()) {
-		right->find(val);
-	}
-    else {
-        cout << "Codigo postal inexistente\n";
-    }
-}
-
 class BST {
     private:
 	Node<Ubicacion> *root;
